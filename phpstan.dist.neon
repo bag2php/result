@@ -1,0 +1,11 @@
+includes:
+	- extension.neon
+	- vendor/phpstan/phpstan/conf/bleedingEdge.neon
+parameters:
+	level: max
+	paths:
+		- src/
+		- tests/
+	bootstrapFiles:
+		- vendor/symplify/easy-coding-standard/vendor/autoload.php
+	tmpDir: cache

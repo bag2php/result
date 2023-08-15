@@ -1,0 +1,5 @@
+services:
+	-
+		class: Bag2\PHPStan\Result\ResultSubtypesExtension
+		tags:
+			- phpstan.broker.allowedSubTypesClassReflectionExtension
