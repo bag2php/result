@@ -18,7 +18,7 @@ Consider an email validation feature: This function reports the reason for the v
 use Bag2\Result;
 
 /**
- * @return Result\Ok<non-empty-string>|Result\Err<array{message: string}>>
+ * @return Result\Ok<non-empty-string>|Result\Err<array{message: string}>
  */
 function validateEmail(string $email): Result
 {
@@ -36,7 +36,9 @@ function validateEmail(string $email): Result
         ]);
     }
 
-    return new Result\Ok($email);
+    assert($filtered !== '');
+
+    return new Result\Ok($filtered);
 }
 ```
 
@@ -65,6 +67,7 @@ If you're using PHPStan, the following code also works type-safely:
 ```php
 $input = filter_var($_POST['email']);
 $failure = validateEmail($input)->getErr()[0] ?? null;
+// Type: $failure = array{message: string}|null
 
 if ($failure === null) {
     $status = 200;
@@ -75,7 +78,7 @@ if ($failure === null) {
     $status = 400;
     $response = [
         'success' => false,
-        'reason' => $failure,
+        'reason' => $failure, // Type: $failure = array{message: string}
     ];
 }
 ```
