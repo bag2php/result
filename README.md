@@ -45,7 +45,7 @@ function validateEmail(string $email): Result
 Let's call this function:
 
 ```php
-$input = filter_var($_POST['email']);
+$input = filter_var($_POST['email'] ?? null, FILTER_DEFAULT, FILTER_NULL_ON_FAILURE) ?? '';
 $result = validateEmail($input);
 
 if (Result::isOk($result)) {
@@ -65,7 +65,7 @@ if (Result::isOk($result)) {
 If you're using PHPStan, the following code also works type-safely:
 
 ```php
-$input = filter_var($_POST['email']);
+$input = filter_var($_POST['email'] ?? null, FILTER_DEFAULT, FILTER_NULL_ON_FAILURE) ?? '';
 $failure = validateEmail($input)->getErr()[0] ?? null;
 // Type: $failure = array{message: string}|null
 
@@ -82,6 +82,24 @@ if ($failure === null) {
     ];
 }
 ```
+
+## Design
+
+### Why not `Result<T, E>`?
+
+Currently PHPStan requires a special extension to create this type. `Ok<T>|Err<E>` is simpler because union types are more friendly to PHP.
+
+### Shouldn't it just be `T|E`?
+
+If the caller can always ensure proper type-checking, it may seem sufficient, but in practice, users can get their values mixed up if they type-check incorrectly.
+
+Wrapping the value in Result prevents accessing to the wrong type. It also supports arbitrary classes as well as other types supported by PHPStan (eg constant types and array-shapes).
+
+### What about `Psl\Result`?
+
+[azjezz/psl](https://github.com/azjezz/psl) is a library inspired by [Hack Standard Library](https://github.com/hhvm/hsl) and provides its own [Result classes](https://github.com/azjezz/psl/tree/next/src/Psl/Result).
+
+But `Psl\Result\Failure` tends to throw exceptions casually.
 
 ## Copyright
 
