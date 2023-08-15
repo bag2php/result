@@ -41,7 +41,7 @@ if (Result::isOk($result)) {
 
 $defaultAdmin = new Admin();
 
-foreach ($result->mapOr($defaultAdmin) as $r) {
+foreach ($result->or($defaultAdmin) as $r) {
     \PHPStan\dumpType($r);
 }
 

@@ -47,7 +47,7 @@ final class Err extends Result
      * @phpstan-return Generator<U>
      * @pure
      */
-    public function mapOr($default): Generator
+    public function or($default): Generator
     {
         yield $default;
     }

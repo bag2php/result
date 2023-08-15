@@ -55,7 +55,7 @@ final class Ok extends Result implements IteratorAggregate
      * @phpstan-return Generator<T|U>
      * @pure
      */
-    public function mapOr($default): Generator
+    public function or($default): Generator
     {
         yield $this->value;
     }
