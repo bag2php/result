@@ -1,10 +1,6 @@
 {
     "map": {
-        "Bag2": "src",
-        "Doctrine\\Instantiator": "vendor\/doctrine\/instantiator\/src\/Doctrine\/Instantiator",
-        "DeepCopy": "vendor\/myclabs\/deep-copy\/src\/DeepCopy",
-        "PHPStan\\ExtensionInstaller": "vendor\/phpstan\/extension-installer\/src",
-        "PHPStan": "vendor\/phpstan\/phpstan-strict-rules\/src"
+        "Bag2": "src"
     },
     "entry-points": [],
     "excludes": [
