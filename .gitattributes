@@ -1,0 +1,6 @@
+.editorconfig export-ignore
+composer.* export-ignore
+ecs.php export-ignore
+extension.neon export-ignore
+sample.php export-ignore
+tests/* export-ignore
